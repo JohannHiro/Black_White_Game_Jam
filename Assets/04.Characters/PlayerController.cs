@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private bool jump = false;
     [SerializeField] private float jumpForce;
     private bool isOnGround = false;
+    private bool canDoubleJump = false;
 
     private void Start()
     {
@@ -34,7 +35,10 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Platform")
+        {
             isOnGround = true;
+            canDoubleJump = true;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -46,7 +50,17 @@ public class PlayerController : MonoBehaviour
     private void GetMovement()
     {
         velocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, rb.velocity.y);
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
-            jump = true;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isOnGround)
+            {
+                jump = true;
+            }
+            else if (canDoubleJump)
+            {
+                jump = true;
+                canDoubleJump = false;
+            }
+        }
     }
 }
