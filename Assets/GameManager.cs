@@ -16,15 +16,22 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         PlayerManager.OnPlayerDeath += ReloadScene;
+        PlayerManager.onPlayerReachGoal += LoadNextScene;
     }
 
     private void OnDisable()
     {
         PlayerManager.OnPlayerDeath -= ReloadScene;
+        PlayerManager.onPlayerReachGoal -= LoadNextScene;
     }
 
     private void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void LoadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

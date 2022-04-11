@@ -8,6 +8,7 @@ TagManager:
   - Spike
   - RespawnPoint
   - Goal
+  - DeathZone
   layers:
   - Default
   - TransparentFX
