@@ -12,7 +12,6 @@ public class PlayerManager : MonoBehaviour
 
     private bool isAlive = true;
     public static event Action OnPlayerDeath;
-    private static Vector2 respawnPoint = Vector2.zero;
     public static event Action onPlayerReachGoal;
 
     public static Power power = Power.DOUBLE_JUMP;
@@ -33,7 +32,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        transform.position = respawnPoint;
+        transform.position = GameManager.Instance.currentRespawnPointPosition;
     }
 
     private void Update()
@@ -49,13 +48,14 @@ public class PlayerManager : MonoBehaviour
     {
         if (other.gameObject.tag == "RespawnPoint")
         {
-            respawnPoint = other.gameObject.transform.position;
-            respawnPoint.y += 3f;
+            GameManager.Instance.currentRespawnPointPosition = other.gameObject.transform.position;
+            GameManager.Instance.currentRespawnPointPosition.y += 3f;
+            GameManager.Instance.currentRespawnPointName = other.gameObject.name;
         }
         if (other.gameObject.tag == "Goal")
         {
             onPlayerReachGoal?.Invoke();
-            respawnPoint = Vector2.zero;
+            GameManager.Instance.currentRespawnPointPosition = Vector2.zero;
         }
         if (other.gameObject.tag == "DeathZone")
         {

@@ -5,12 +5,17 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public string currentRespawnPointName;
+    public Vector2 currentRespawnPointPosition;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
             Destroy(this);
         else
             Instance = this;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnEnable()

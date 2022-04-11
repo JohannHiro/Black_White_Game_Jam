@@ -2,23 +2,20 @@ using UnityEngine;
 
 public class RespawnPointManager : MonoBehaviour
 {
+    [SerializeField] private Sprite inactivatedRespawnPoint;
     [SerializeField] private Sprite activatedRespawnPoint;
     private SpriteRenderer spriteRenderer;
-    private static bool isActivated = false;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        if (isActivated)
-            spriteRenderer.sprite = activatedRespawnPoint;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Update()
     {
-        if (other.gameObject.tag == "Player" && !isActivated)
-        {
+        if (gameObject.name == GameManager.Instance.currentRespawnPointName)
             spriteRenderer.sprite = activatedRespawnPoint;
-            isActivated = true;
-        }
+        else
+            spriteRenderer.sprite = inactivatedRespawnPoint;
     }
 }
