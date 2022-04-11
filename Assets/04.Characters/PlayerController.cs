@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
             {
                 jump = true;
             }
-            else if (canDoubleJump)
+            else if (canDoubleJump && PlayerManager.power == PlayerManager.Power.DOUBLE_JUMP)
             {
                 jump = true;
                 canDoubleJump = false;
