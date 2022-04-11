@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     private void GetMovement()
     {
         velocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, rb.velocity.y);
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (isOnGround)
             {
