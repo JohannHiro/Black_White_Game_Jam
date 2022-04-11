@@ -17,7 +17,9 @@ public class PlayerManager : MonoBehaviour
 
     public static Power power = Power.DOUBLE_JUMP;
     private bool isShielded = false;
+    private bool canShield = true;
     [SerializeField] private float shieldDuration;
+    [SerializeField] private float shieldCooldown;
 
     private void OnEnable()
     {
@@ -36,7 +38,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && !isShielded && power == Power.SHIELD)
+        if (Input.GetKeyDown(KeyCode.X) && canShield && !isShielded && power == Power.SHIELD)
         {
             StopCoroutine(BecomeInvincibleCoroutine());
             StartCoroutine(BecomeInvincibleCoroutine());
@@ -74,10 +76,14 @@ public class PlayerManager : MonoBehaviour
     private IEnumerator BecomeInvincibleCoroutine()
     {
         isShielded = true;
-        Debug.Log(isShielded);
+        canShield = false;
+        Debug.Log("Shield activate");
         yield return new WaitForSeconds(shieldDuration);
         isShielded = false;
-        Debug.Log(isShielded);
+        Debug.Log("Shield close");
+        yield return new WaitForSeconds(shieldCooldown);
+        canShield = true;
+        Debug.Log("Can shield");
     }
 
     private void ChangePower()

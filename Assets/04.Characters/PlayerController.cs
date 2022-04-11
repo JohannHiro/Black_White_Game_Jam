@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = velocity;
         if (jump)
         {
-            rb.velocity = Vector2.up * jumpForce;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jump = false;
         }
     }

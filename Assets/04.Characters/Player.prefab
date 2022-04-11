@@ -162,4 +162,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcaff8806459d1d4997f558d3675d0ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldDuration: 3
+  shieldDuration: 1.5
+  shieldCooldown: 5
